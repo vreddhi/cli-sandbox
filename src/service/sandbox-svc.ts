@@ -24,7 +24,11 @@ function sendEdgeRequest(pth: string, method: string, body, headers, filePath?: 
   const edge = envUtils.getEdgeGrid();
   let path = pth;
   if (accountKey) {
-    path += `?accountSwitchKey=${accountKey}`;
+    if(path.includes('?')) {
+      path += `&accountSwitchKey=${accountKey}`;
+    } else {
+      path += `?accountSwitchKey=${accountKey}`;
+    }
   }
 
   return new Promise<any>(
