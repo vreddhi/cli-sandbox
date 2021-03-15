@@ -105,7 +105,11 @@ function putTarball(path: string, edgeworkerTarballPath) {
 
 function getJson(path: string) {
   if (accountWide) {
-    path += `?access=account`;
+    if (accountKey) {
+      path += `?access=account&accountSwitchKey=${accountKey}`;
+    } else {
+      path += `?access=account`;
+    }
   }
   return sendEdgeRequest(path, 'GET', '', {});
 }
